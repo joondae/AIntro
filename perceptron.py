@@ -10,15 +10,17 @@ def sigmoid(x):
 def sigmoid_derrivative(x):
     return x * (1 - x)
 
+# Grid of training inputs
 training_inputs = np.array([
     [1,0,1],
     [0,1,1],
-    [1,1,0]
+    [1,1,0],
+    [0,1,0]
 ])
 
 # .T Transpose the matrix so its a 1 x 4
 training_outputs = np.array(
-    [[0,1,1]]
+    [[0,1,1,1]]
 ).T
 
 np.random.seed(2)
@@ -28,10 +30,10 @@ np.random.seed(2)
 # Create random weights
 synaptic_weights = 2 * np.random.random((3,1)) - 1
 
-print('Random starting synaptic weights')
-print(synaptic_weights)
+#print('Random starting synaptic weights')
+#print(synaptic_weights)
 
-for iteration in range(100000):
+for iteration in range(1):
 
     input_layer = training_inputs
 
@@ -53,9 +55,11 @@ for iteration in range(100000):
     # print(error)
 
     adjustments = error * sigmoid_derrivative(normalized_outputs)
-    # print('Adjustments')
-    # print(adjustments)
-
+    print('Adjustments')
+    print(adjustments)
+    print(input_layer.T)
+    print(np.dot(input_layer.T, adjustments))
+    print(synaptic_weights)
     synaptic_weights += np.dot(input_layer.T, adjustments)
     # print('New Weights')
 
